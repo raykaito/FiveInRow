@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<meta http-equiv="content-type" content="text/html; charset=Shift_JIS">
+
+<html>
+
+<head>
+	<title>Five In a Row</title>
+	<link rel="stylesheet" href="noline.css" type="text/css">
+
+</head>
+
+
+<body>
+
+	<table border="0" align="center" width="900" background="bg_image.gif">
+	
+		<tr>
+			<td colspan="2" align="center">	
+			<img src="icon_igo.png"
+			width="122" height="60" align="top">
+			<B> <Font size="10" Font color="black"><TNR>
+		       Five In a Row
+			</Font></TNR></B>
+			<hr>
+			<canvas id="myCanvas" width="750" height="750"></canvas>
+			</td>
+		</tr>
+	</table>
+
+<script type="text/javascript" src="canvas.js"></script>
+<script type="text/javascript">
+<!--
+ 
+	var canvas=document.getElementById('myCanvas');
+	var cs=canvas.getContext('2d');
+	cs.lineWidth = 1;
+	cs.strokeStyle="black";
+
+	var x,y;
+	var OP;
+	OP = "(150,200)(300,50)(450,200)";
+	x = orderedPairs(OP,true);
+	y = orderedPairs(OP,false);
+	drawChain(x, y, "0120");
+	letters("ABC", x, y, "012");
+	cs.strokeStyle="blue";
+	sameAngleSymbol(x,y,30,"201");
+	sameAngleSymbol(x,y,30,"120");
+	cs.strokeStyle="red";
+	rightAngleSymbol(x,y,30,"012");
+
+ 
+//--> 
+</script>
+
+</body>
+
+
+</html>
