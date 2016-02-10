@@ -1,7 +1,6 @@
 var row, col, width, height;
 var currentPlayer, moveCount;
 var tile = [];
-boolean showKihu=false, showScore=false; 
 
 function init(){
 	var i;
