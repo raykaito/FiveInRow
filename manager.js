@@ -1,6 +1,5 @@
 var row, col, width, height;
-var currentPlayer, moveCount;
-var tile = [];
+var b = new board();
 
 function init(){
 	var i;
@@ -8,15 +7,13 @@ function init(){
 	col = 15;//x
 	width = canvas.width;
 	height= canvas.height;
-	for(i=0; i<row*col;i++){
-		tile.push(0);
-	}
-	clearBoard();
+	b.init();
+	b.clearBoard();
 }
 
 function clicked(event){
 	rect = event.target.getBoundingClientRect();
 	x = event.pageX-rect.left,
 	y = event.pageY-rect.top;
-	setStone(x,y);
+	b.setStone(x,y);
 }
