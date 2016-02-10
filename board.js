@@ -1,19 +1,35 @@
-function setStone(x,y){
+function board(){
+	this.t = [];
+	this.currentPlayer = 1;
+	this.moveCout = 0;
+}
+board.prototype.init = function(){
+	var i;
+	for(i=0; i<row*col;i++){
+		this.t.push(new tile());
+	}
+}
+board.prototype.clearBoard = function(){
+	var i;
+	for(i=0;i<row*col;i++){
+		this.t[i].p = 0;
+	}
+	this.currentPlayer = 1;
+	this.moveCount = 0;
+};
+board.prototype.setStone = function(x,y){
 	x = Math.floor(x*col/width);
 	y = Math.floor(y*row/height);
 	index = y*col + x;
-	if(tile[index]==0){
-		moveCount++;
-		tile[index] = moveCount*currentPlayer;
-		currentPlayer*=-1;
+	if(this.t[index].p==0){
+		this.moveCount++;
+		this.t[index].p = this.moveCount*this.currentPlayer;
+		this.currentPlayer*=-1;
 	}
 	updateCanvas();
-}
-function clearBoard(){
-	var i;
-	for(i=0;i<row*col;i++){
-		tile[i] = 0;
-	}
-	currentPlayer = 1;
-	moveCount = 0;
+};
+
+function tile () {
+	this.p = 0;
+	this.score =0;
 }

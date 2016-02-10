@@ -16,7 +16,7 @@ function drawStones(){
 		else		cs.fillStyle="white";
 		for(i=0;i<row;i++){
 			for(j=0;j<col;j++){
-				if(p*tile[i*col+j]>0){
+				if(p*b.t[i*col+j].p>0){
 					x = j*xcell+xcell/2;
 					y = i*ycell+ycell/2;
 					drawCircle(x,y,xcell/2,0,Math.PI*2);
