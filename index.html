@@ -13,7 +13,7 @@
 
 <body>
 
-	<table border="0" align="center" width="900" background="bg_image.gif">
+	<table border="0" align="center" width="512" background="bg_image.gif">
 	
 		<tr>
 			<td colspan="2" align="center">	
@@ -23,32 +23,27 @@
 		       Five In a Row
 			</Font></TNR></B>
 			<hr>
-			<canvas id="myCanvas" width="750" height="750"></canvas>
+			<canvas id="myCanvas" width="500" height="500"></canvas>
 			</td>
 		</tr>
 	</table>
 
+<script type="text/javascript" src="manager.js"></script>
+<script type="text/javascript" src="board.js"></script>
 <script type="text/javascript" src="canvas.js"></script>
 <script type="text/javascript">
 <!--
  
-	var canvas=document.getElementById('myCanvas');
-	var cs=canvas.getContext('2d');
+	var canvas = document.getElementById('myCanvas');
+	var cs = canvas.getContext('2d');
 	cs.lineWidth = 1;
-	cs.strokeStyle="black";
 
-	var x,y;
-	var OP;
-	OP = "(150,200)(300,50)(450,200)";
-	x = orderedPairs(OP,true);
-	y = orderedPairs(OP,false);
-	drawChain(x, y, "0120");
-	letters("ABC", x, y, "012");
-	cs.strokeStyle="blue";
-	sameAngleSymbol(x,y,30,"201");
-	sameAngleSymbol(x,y,30,"120");
-	cs.strokeStyle="red";
-	rightAngleSymbol(x,y,30,"012");
+	canvas.addEventListener('click', clicked,false);
+
+
+	init();
+	updateCanvas();
+
 
  
 //--> 
