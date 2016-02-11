@@ -16,14 +16,34 @@
 	<table border="0" align="center" width="512" background="bg_image.gif">
 	
 		<tr>
-			<td colspan="2" align="center">	
-			<img src="icon_igo.png"
-			width="122" height="60" align="top">
-			<B> <Font size="10" Font color="black"><TNR>
-		       Five In a Row
-			</Font></TNR></B>
-			<hr>
-			<canvas id="myCanvas" width="500" height="500"></canvas>
+			<td colspan ="3" align="center">	
+				<img src="icon_igo.png"
+				width="122" height="60" align="top">
+				<Font size="10" Font color="black">
+			       Five In a Row
+				</Font>
+				<hr>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<div id="display"></div>
+			</td>
+			<td align="right">
+				<div id="displaz"></div>
+			</td>
+			<td align="left">
+				<select id="cplevel" onchange="cpuSelected()">
+					<option value="1">Beginner</option>
+					<option value="2">Normal</option>
+					<option value="3">Advanced</option>
+					<option value="4">Ace</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan ="3"  align="center">
+				<canvas id="myCanvas" width="500" height="500"></canvas>
 			</td>
 		</tr>
 	</table>
@@ -31,17 +51,32 @@
 <script type="text/javascript" src="board.js"></script>
 <script type="text/javascript" src="canvas.js"></script>
 <script type="text/javascript" src="manager.js"></script>
+<script type="text/javascript" src="analyzer.js"></script>
+<script type="text/javascript" src="settings.js"></script>
 <script type="text/javascript">
 <!--
  
 	var canvas = document.getElementById('myCanvas');
+	var cplevel= document.getElementById('cplevel');
+	var display= document.getElementById('display');
+	var displaz= document.getElementById('displaz');
+
 	var cs = canvas.getContext('2d');
 	cs.lineWidth = 1;
 
-	canvas.addEventListener('click', clicked,false);
+	addEventListener('keydown',keyPressed,false);
+	addEventListener('keyup',keyReleased,false);
+
+	canvas.addEventListener('click', clicked, false);
+	display.addEventListener('click', diyclick,false);
+	displaz.addEventListener('click', dizclick,false);
+	canvas.addEventListener('touchcancel', clicked, false);
+	display.addEventListener('touchcancel', diyclick, false);
+	displaz.addEventListener('touchcancel', dizclick, false);
 
 
 	init();
+	setup();
 	updateCanvas();
 
 
