@@ -1,4 +1,5 @@
 function updateCanvas(){
+	if(cpuActive) return;
 	cs.clearRect(0,0,width,height);
 	cs.fillStyle="rgb(253, 187, 129)";
 	cs.fillRect(0,0,width,height);
@@ -16,7 +17,7 @@ function drawStones(){
 		for(j=0;j<col;j++){
 
 			p = b.t[i*col+j].p;
-			s = b.t[i*col+j].score;
+			s = b.getScore(b.currentPlayer, cpulevel[cpuDisplayed]==2, i*col+j);
 			x = j*xcell+xcell/2;
 			y = i*ycell+ycell/2;
 
@@ -29,7 +30,7 @@ function drawStones(){
 				}
 			}else if(showScore&&s>0){
 				cs.fillStyle="white";
-				drawCenteredText(x,y,xcell/3,""+s);
+				drawCenteredText(x,y,xcell/2,""+s);
 			}
 		}
 	}
