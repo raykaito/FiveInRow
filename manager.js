@@ -25,7 +25,7 @@ function keyPressed(event){
 		case  90: b.saveb(); break;
 		case  65: b.loadb(); break;
 		case 116: break;
-		default : alert("keyCode: "+event.keyCode);
+		//default : alert("keyCode: "+event.keyCode);
 	}
 	updateCanvas();
 }

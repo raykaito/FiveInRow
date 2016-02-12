@@ -47,8 +47,7 @@ function basic(advanced){
 	record = champCount = 0;
 	for(i=0;i<row*col;i++){
 		if(getSide(i)!=0) continue;
-		if(advanced)	score = (b.t[i].getScore(b.currentPlayer));
-		else			score = (b.t[i].getRawScore(b.currentPlayer));
+		score = b.getScore(b.currentPlayer,advanced,i)
 		if(record<score){
 			record = score;
 			champCount = 1;
@@ -63,8 +62,7 @@ function basic(advanced){
 	luckyChampNumber = Math.floor(Math.random()*champCount);
 	for(i=0;i<row*col;i++){
 		if(getSide(i)!=0) continue;
-		if(advanced)	score = (b.t[i].getScore(b.currentPlayer));
-		else			score = (b.t[i].getRawScore(b.currentPlayer));
+		score = b.getScore(b.currentPlayer,advanced,i)
 		if(record==score){
 			if(luckyChampNumber == 0){
 				return i;

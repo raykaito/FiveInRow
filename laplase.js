@@ -1,6 +1,6 @@
 function laplase(){
 	cpuActive = true;
-	var i, k, j, r=20;//r: how many times it will fight over;
+	var i, k, j, r=15;//r: how many times it will fight over;
 	var topTenIndex;
 	var winratio, record=-1, champ=0;
 

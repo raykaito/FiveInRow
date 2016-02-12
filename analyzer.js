@@ -34,7 +34,8 @@ function getTopTen(){
 function analyzeAll(){
 	var i;
 	for(i=0;i<row*col;i++){
-		analyze(i);
+		judge(i);
+		updateTile(i);
 	}
 }
 
@@ -66,26 +67,23 @@ function updateTiles(index){
 function updateTile(index){
 	if(getSide(index)!=0) return;
 	
-	var dire, dr, dc, i, lengthRecord, otype, sp, rev;//ScoredPlayer, Reverser
-	var nrow, ncol, r, c, temp;
+	var dire, dr, dc, i, lengthRecord, sp, rev;//ScoredPlayer, Reverser
+	var nrow, ncol, r, c, score;
 	
 	r = tor(index); c = toc(index);
 	rev = sp = 1;
 	
 	b.t[index].clear();
 	for(sp=1;sp>-3;sp-=2){
-		if(sp==1)temp = b.t[index].b;
-		if(sp!=1)temp = b.t[index].w;
+		if(sp==1)temp = b.t[index].bscore;
+		if(sp!=1)temp = b.t[index].wscore;
 		for(rev=1;rev>-3;rev-=2){
 			for(dire=0;dire<4;dire++){
 				
-				lengthRecord = otype = 0;
+				lengthRecord = 0;
 				aLength = adLength = aPossible = 0;
 				bLength = bdLength = bPossible = 0;
 				aopen = bopen = adopen = bdopen = false;
-
-				if(rev==1) for(i=1;i<6;i++) otype -= temp.stype[i];
-				if(rev!=1) for(i=1;i<6;i++) otype -= temp.mtype[i];
 				
 				switch(dire){
 					case  0: dr= 1; dc= 0; break;//Horizontal
@@ -139,36 +137,35 @@ function updateTile(index){
 					lengthRecord = length;
 				}
 				if(rev==1){
-					if(length>=4) 					 	{temp.stype[0]++;}		//Hit here, you win
-					if(length==3  &&(aopen && bopen))	{temp.stype[1]++;}		//Hit here, 4 in row with two open ends
-					if(length==3  &&(aopen || bopen))	{temp.stype[4]++;}		//Hit here, 4 in row with one open end
-					if(dLength==3 &&   length!=3    )	{temp.stype[5]++;}		//Hit here, 4 in row with one hole
-					if(length==2  &&(aopen && bopen))	{temp.stype[2]++;}		//Hit here, 3 in row with two open ends
-					if(dLength==2 &&(adopen&&bopen))	{temp.stype[3]++;}		//Hit here, 3 in row with one hole
-					if(dLength==2 &&(bdopen&&aopen))	{temp.stype[3]++;}		//Hit here, 3 in row with one hole
+					if(length>=4) 					 	{temp[1] += 8888;}		//Hit here, you win
+					if(length==3  &&(aopen && bopen))	{temp[1] += 2400;}		//Hit here, 4 in row with two open ends
+					if(length==3  &&(aopen || bopen))	{temp[1] +=  100;}		//Hit here, 4 in row with one open end
+					if(dLength==3 &&   length!=3    )	{temp[1] +=  100;}		//Hit here, 4 in row with one hole
+					if(length==2  &&(aopen && bopen))	{temp[1] +=  100;}		//Hit here, 3 in row with two open ends
+					if(dLength==2 &&(adopen&&bopen))	{temp[1] +=  100;}		//Hit here, 3 in row with one hole
+					if(dLength==2 &&(bdopen&&aopen))	{temp[1] +=  100;}		//Hit here, 3 in row with one hole
 				}else{
-					if(length>=4) 					 	{temp.mtype[0]++;}		//Hit here, you win
-					if(length==3  &&(aopen && bopen))	{temp.mtype[1]++;}		//Hit here, 4 in row with two open ends
-					if(length==3  &&(aopen || bopen))	{temp.mtype[4]++;}		//Hit here, 4 in row with one open end
-					if(dLength==3 &&   length!=3    )	{temp.mtype[5]++;}		//Hit here, 4 in row with one hole
-					if(length==2  &&(aopen && bopen))	{temp.mtype[2]++;}		//Hit here, 3 in row with two open ends
-					if(dLength==2 &&(adopen&&bopen))	{temp.mtype[3]++;}		//Hit here, 3 in row with one hole
-					if(dLength==2 &&(bdopen&&aopen))	{temp.mtype[3]++;}		//Hit here, 3 in row with one hole
-					if(adLength==3&&(adopen)&&aLength!=0){temp.mtype[1]++;}		//Hit here, it blocks
-					if(bdLength==3&&(bdopen)&&bLength!=0){temp.mtype[1]++;}		//Hit here, it blocks
+					if(length>=4) 					 	{temp[1] += 6666;}		//Hit here, you win
+					if(length==3  &&(aopen && bopen))	{temp[1] += 1800;}		//Hit here, 4 in row with two open ends
+					if(length==3  &&(aopen || bopen))	{temp[1] +=   80;}		//Hit here, 4 in row with one open end
+					if(dLength==3 &&   length!=3    )	{temp[1] +=   80;}		//Hit here, 4 in row with one hole
+					if(length==2  &&(aopen && bopen))	{temp[1] +=   80;}		//Hit here, 3 in row with two open ends
+					if(dLength==2 &&(adopen&&bopen))	{temp[1] +=   80;}		//Hit here, 3 in row with one hole
+					if(dLength==2 &&(bdopen&&aopen))	{temp[1] +=   80;}		//Hit here, 3 in row with one hole
+					if(adLength==3&&(adopen)&&aLength!=0){temp[1]+= 1800;}		//Hit here, it blocks
+					if(bdLength==3&&(bdopen)&&bLength!=0){temp[1]+= 1800;}		//Hit here, it blocks
 				}
-				if(rev==1) for(i=1;i<6;i++) otype += temp.stype[i];
-				if(rev!=1) for(i=1;i<6;i++) otype += temp.mtype[i];
-				
-				if(otype!=0){
-					if(aLength==0||bLength==0) temp.dcount++;
+
+				if(rev==1){
+					temp[1] += lengthRecord*lengthRecord*5;
+					temp[0] += lengthRecord*lengthRecord*5;
+				}else{
+					temp[1] += lengthRecord*lengthRecord*4;
+					temp[0] += lengthRecord*lengthRecord*4;
 				}
-				if(rev==1)temp.sscore += lengthRecord*lengthRecord;
-				else temp.mscore += lengthRecord*lengthRecord;
 			}
 		}
 	}
-	b.t[index].updateScore();
 }
 
 function judge(index){

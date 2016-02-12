@@ -45,5 +45,5 @@ function displayAll(){
 		display.innerHTML = states[stateIndex];
 		displaz.innerHTML = "Play Again!!";
 	}
-	setTimeout(aiCheck,300);
+	setTimeout(aiCheck,50);
 }

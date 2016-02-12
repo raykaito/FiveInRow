@@ -1,66 +1,20 @@
-function tileScore(){
-	this.sscore = 0;
-	this.mscore = 0;
-	this.score  = 0;
-	this.rscore = 0;
-	this.dcount = 0;
-	this.stype = [0,0,0,0,0,0];
-	this.mtype = [0,0,0,0,0,0];
-}
-tileScore.prototype.init = function(){
-	this.clear();
-};
-tileScore.prototype.clear = function(){
-	this.mtype[0] = this.stype[0] = 0;//  xooooox //  m=6666, s=8888
-	this.mtype[1] = this.stype[1] = 0;//  _oooo_  //  m= 333, s= 444
-	this.mtype[2] = this.stype[2] = 0;//  _ooo_   //  m=  80, s= 100
-	this.mtype[3] = this.stype[3] = 0;//  _o_oo_  //  m=  80, s= 100
-	this.mtype[4] = this.stype[4] = 0;//  _oooox  //  m=  80, s= 100
-	this.mtype[5] = this.stype[5] = 0;//  xoo_oox //  m=  80, s= 100
-	this.sscore = this.mscore = this.dcount = 0;
-	this.score  = this.rscore = 0;
-};
-tileScore.prototype.updateScore = function(){
-	if(this.mtype[0]==1||this.stype[0]==1){
-		this.score = 1111*(this.stype[0]==1?8:6);
-		this.rscore = 1111*(this.stype[0]==1?8:6);
-		return;
-	}
-	this.rscore+= this.mscore*4 + this.sscore*5;
-	this.score += this.mscore*4 + this.sscore*5;
-	this.score += this.mtype[1]*1800+ this.stype[1]*2400;
-	this.score += this.mtype[2]*80  + this.stype[2]*100;
-	this.score += this.mtype[3]*80  + this.stype[3]*100;
-	this.score += this.mtype[4]*80  + this.stype[4]*100;
-	this.score += this.mtype[5]*80  + this.stype[5]*100;
-	if(this.dcount>0) ;           // score/=2;
-};
-
 function tile(){
 	this.p = 0;
-	this.b = new tileScore();
-	this.w = new tileScore();
+	this.bscore = [0,0];
+	this.wscore = [0,0];
 }
-tile.prototype.getRawScore = function(player){
-	if(player==1)	return this.b.rscore;
-	else			return this.w.rscore;
-}
-tile.prototype.getScore = function(player){
-	if(player==1)	return this.b.score;
-	else			return this.w.score;
-}
+tile.prototype.getScore = function(player, level){
+	if(player==1)
+		return this.bscore[level];
+	else
+		return this.wscore[level];
+};
 tile.prototype.init = function(){
 	this.clear();
-	this.b.init();
-	this.w.init();
 };
 tile.prototype.clear = function(){
-	this.b.clear();
-	this.w.clear();
-};
-tile.prototype.updateScore = function(){
-	this.b.updateScore();
-	this.w.updateScore();
+	this.bscore[0] = this.bscore[1] = 0;
+	this.wscore[0] = this.wscore[1] = 0;
 };
 
 function board(){
@@ -90,19 +44,7 @@ board.prototype.loadb = function(){
 	updateCanvas();
 };
 board.prototype.getScore = function(player, advanced, index){
-	var s;
-	if(player==1){
-		if(advanced)
-			s = b.t[index].b.score;
-		else
-			s = b.t[index].b.rscore;
-	}else{
-		if(advanced)
-			s = b.t[index].w.score;
-		else
-			s = b.t[index].w.rscore;
-	}
-	return s;
+	return this.t[index].getScore(player, advanced?1:0);
 };
 board.prototype.init = function(){
 	var i;

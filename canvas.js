@@ -17,7 +17,7 @@ function drawStones(){
 		for(j=0;j<col;j++){
 
 			p = b.t[i*col+j].p;
-			s = b.getScore(b.currentPlayer, cpulevel[cpuDisplayed]==2, i*col+j);
+			s = b.getScore(b.currentPlayer, cpulevel[cpuDisplayed]!=1, i*col+j);
 			x = j*xcell+xcell/2;
 			y = i*ycell+ycell/2;
 
