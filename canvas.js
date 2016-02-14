@@ -23,8 +23,8 @@ function drawStones(){
 
 			if(Math.abs(p)>0){
 				cs.fillStyle=(p>0)?"black":"white";
-				drawCircle(x,y,xcell/2,0,Math.PI*2);
-				if(showKihu){
+				cs.drawImage((p>0)?imgb:imgw,0,0,100,100,xcell*(j+0.025),ycell*(i+0.025),xcell*0.95, ycell*0.95);
+				if(showKihu||b.moveCount==Math.abs(p)){
 					cs.fillStyle=(p<0)?"black":"white";
 					drawCenteredText(x,y,xcell/2,""+Math.abs(p));
 				}

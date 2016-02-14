@@ -5,7 +5,7 @@ var cpuActive;
 
 function setup(){
 	player = ["Human", "CPU 2"];
-	cpulevel = [2,3];
+	cpulevel = [1,1];
 	states = ["Continue", "Black Won!", "White Won!", "Draw"];
 	stateIndex = 0;
 	cpuDisplayed = 1;
