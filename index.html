@@ -16,20 +16,26 @@
 	<table border="0" align="center" width="512" background="bg_image.gif">
 	
 		<tr>
-			<td colspan ="3" align="center">	
+			<td colspan ="5" align="center">	
 				<img src="icon_igo.png"
 				width="122" height="60" align="top">
-				<Font size="10" Font color="black">
+				<Font size="10" Font color="black"><TNR>
 			       Five In a Row
-				</Font>
+				</Font></TNR>
 				<hr>
 			</td>
 		</tr>
 		<tr>
-			<td align="center">
+			<td width="10" align="center">
+				
+			</td>
+			<td width="140" align="left">
 				<div id="display"></div>
 			</td>
-			<td align="right">
+			<td width="120" align="right">
+
+			</td>
+			<td width="120" align="right">
 				<div id="displaz"></div>
 			</td>
 			<td align="left">
@@ -42,14 +48,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan ="3"  align="center">
+			<td colspan ="5"  align="center">
 				<canvas id="myCanvas" width="500" height="500"></canvas>
 			</td>
 		</tr>
 	</table>
 
+<script type="text/javascript" src="cpu.js"></script>
 <script type="text/javascript" src="board.js"></script>
 <script type="text/javascript" src="canvas.js"></script>
+<script type="text/javascript" src="laplase.js"></script>
 <script type="text/javascript" src="manager.js"></script>
 <script type="text/javascript" src="analyzer.js"></script>
 <script type="text/javascript" src="settings.js"></script>
@@ -60,6 +68,16 @@
 	var cplevel= document.getElementById('cplevel');
 	var display= document.getElementById('display');
 	var displaz= document.getElementById('displaz');
+
+	var imgb = new Image();
+	var imgw = new Image();
+
+	imgb.src = 'stone_black.png';
+	imgw.src = 'stone_white.png';
+
+	if(screen.width<800){
+		document.body.style.width='520xp';
+	}
 
 	var cs = canvas.getContext('2d');
 	cs.lineWidth = 1;

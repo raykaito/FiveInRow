@@ -12,8 +12,7 @@ function init(){
 	height= canvas.height;
     canvas.style.width = "500px";
     canvas.style.height = "500px";
-	b.init();
-	b.clearBoard();
+    b.init();
 }
 
 function keyPressed(event){
@@ -22,8 +21,11 @@ function keyPressed(event){
 		case  37: b.moveBack()  ; break;
 		case  75: showKihu =true; break;
 		case  83: showScore=true; break;
+		case  88: aiMove(-1)    ; break;
+		case  90: b.saveb(); break;
+		case  65: b.loadb(); break;
 		case 116: break;
-		default : alert("keyCode: "+event.keyCode);
+		//default : alert("keyCode: "+event.keyCode);
 	}
 	updateCanvas();
 }
@@ -41,22 +43,29 @@ function clicked(event){
 	y = event.pageY-rect.top-document.body.scrollTop;
 	x *= pixelRatio;
 	y *= pixelRatio;
-	b.setStone(x,y);
+
+	x = Math.floor(x*col/width);//column
+	y = Math.floor(y*row/height);//row
+	index = toi(y,x);
+
+	b.setStone(index);
 }
 
 function diyclick(event){
 	rect = event.target.getBoundingClientRect();
 	x = event.pageX-rect.left-document.body.scrollLeft;
 	y = event.pageY-rect.top-document.body.scrollTop;
-	if(stateIndex!=0){
-		b.clearBoard();
-		updateCanvas();
-	}else if(x>(display.offsetWidth/2))
+	if(x>(display.offsetWidth/2))
 		switchPlayer(1);
 	else
 		switchPlayer(0);
 }
 
 function dizclick(){
+	if(stateIndex!=0){
+		b.clearBoard();
+		updateCanvas();
+		return;
+	}
 	switchCpuDisplayed();
 }

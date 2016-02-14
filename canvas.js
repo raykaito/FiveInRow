@@ -1,4 +1,5 @@
 function updateCanvas(){
+	if(cpuActive) return;
 	cs.clearRect(0,0,width,height);
 	cs.fillStyle="rgb(253, 187, 129)";
 	cs.fillRect(0,0,width,height);
@@ -16,20 +17,20 @@ function drawStones(){
 		for(j=0;j<col;j++){
 
 			p = b.t[i*col+j].p;
-			s = b.t[i*col+j].score;
+			s = b.getScore(b.currentPlayer, cpulevel[cpuDisplayed]!=1, i*col+j);
 			x = j*xcell+xcell/2;
 			y = i*ycell+ycell/2;
 
 			if(Math.abs(p)>0){
 				cs.fillStyle=(p>0)?"black":"white";
-				drawCircle(x,y,xcell/2,0,Math.PI*2);
-				if(showKihu){
+				cs.drawImage((p>0)?imgb:imgw,0,0,100,100,xcell*(j+0.025),ycell*(i+0.025),xcell*0.95, ycell*0.95);
+				if(showKihu||b.moveCount==Math.abs(p)){
 					cs.fillStyle=(p<0)?"black":"white";
 					drawCenteredText(x,y,xcell/2,""+Math.abs(p));
 				}
 			}else if(showScore&&s>0){
 				cs.fillStyle="white";
-				drawCenteredText(x,y,xcell/3,""+s);
+				drawCenteredText(x,y,xcell/2,""+s);
 			}
 		}
 	}

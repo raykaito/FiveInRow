@@ -1,15 +1,17 @@
 var player, cpulevel, cpuDisplayed;
 var showKihu, showScore;
 var stateIndex, states;
+var cpuActive;
 
 function setup(){
-	player = ["Human", "Human"];
+	player = ["Human", "CPU 2"];
 	cpulevel = [1,1];
 	states = ["Continue", "Black Won!", "White Won!", "Draw"];
 	stateIndex = 0;
-	cpuDisplayed = 0;
+	cpuDisplayed = 1;
 	showKihu = false;
 	showScore= false;
+	cpuActive= false;
 
 	displayAll();
 }
@@ -25,14 +27,23 @@ function switchCpuDisplayed(){
 }
 
 function cpuSelected(){
-	cpulevel[cpuDisplayed] = cplevel.value;
+	if(Number(cplevel.value)==4){
+		alert("Sorry, our Ace is not here today. Please visit us after some days.");
+		cplevel.value = cpulevel[cpuDisplayed];
+		return;
+	}
+	cpulevel[cpuDisplayed] = Number(cplevel.value);
+	displayAll();
 }
 
 function displayAll(){
 	cplevel.value = cpulevel[cpuDisplayed];
-	if(stateIndex==0)
+	if(stateIndex==0){
 		display.innerHTML = player[0]+" vs "+player[1];
-	else
+		displaz.innerHTML = "CPU "+(cpuDisplayed+1)+" Level:";
+	}else{
 		display.innerHTML = states[stateIndex];
-	displaz.innerHTML = "CPU "+(cpuDisplayed+1)+" Level:";
+		displaz.innerHTML = "Play Again!!";
+	}
+	setTimeout(aiCheck,50);
 }
