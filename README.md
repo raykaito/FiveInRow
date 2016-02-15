@@ -12,13 +12,13 @@ I included every file needed to run this page, which includes the pictures of st
 URL: http://thehomepage.sitemix.jp/
 
 #How to play
-To play against my AI, simply select the AI level and click on the board to set a stone. You can hit "Human vs CPU 1," to toggle the side. You can play against your friend, or you can see CPUs playing against each other. You can hit "CPU 2 level:" to toggle the CPUs as well.
-
-There are some other festures you can use with keyboard...
-esc...Clears the board
-K.....Shows the order of stones
-S.....Shows the score on tile
-Z.....Saves the board
-A.....Loads the board
-
+To play against my AI, simply select the AI level and click on the board to set a stone. You can hit "Human vs CPU 1," to toggle the side. You can play against your friend, or you can see CPUs playing against each other. You can hit "CPU 2 level:" to toggle the CPUs as well.</br>
+</br>
+There are some other festures you can use with keyboard...</br>
+esc...Clears the board</br>
+K.....Shows the order of stones</br>
+S.....Shows the score on tile</br>
+Z.....Saves the board</br>
+A.....Loads the board</br>
+</br>
 Enjoy!
