@@ -15,7 +15,7 @@ URL: http://thehomepage.sitemix.jp/
 To play against my AI, simply select the AI level and click on the board to set a stone. You can hit "Human vs CPU 1," to toggle the side. You can play against your friend, or you can see CPUs playing against each other. You can hit "CPU 2 level:" to toggle the CPUs as well.</br>
 </br>
 There are some other festures you can use with keyboard...</br>
-esc...Clears the board</br>
+ESC...Clears the board</br>
 K.....Shows the order of stones</br>
 S.....Shows the score on tile</br>
 Z.....Saves the board</br>
